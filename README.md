@@ -6,7 +6,7 @@
 stow .
 ```
 
-## Moving Machines
+## Moving Macs
 
 ```bash
 # Leaving a machine
