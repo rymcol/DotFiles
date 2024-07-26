@@ -1,3 +1,4 @@
 --target=~/.config
+--restow
 --ignore=.stowrc
 --ignore=.DS_Store
