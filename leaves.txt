@@ -14,12 +14,14 @@ go
 hugo
 jq
 lua-language-server
+lusingander/tap/serie
 nb
 neovim
 node
 pinentry-mac
 pnpm
 postgresql@14
+pv
 qemu
 restic
 ruby
