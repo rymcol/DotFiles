@@ -18,7 +18,7 @@ return {
 
   -- Window Style --
   window_decorations = "RESIZE",
-  window_background_opacity = 0.95,
+  window_background_opacity = 0.97,
     
   -- Fancy Tabs --
   use_fancy_tab_bar = true,
