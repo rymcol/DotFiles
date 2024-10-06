@@ -17,32 +17,37 @@ if set -q TERMUX_VERSION
   end                                                                            # pnpm end
 
 else
+  
+  switch (uname)
+    case Darwin
+      # gcloud macOS
+      source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
+  
+      # Fix ruby path
+      set -gx PATH /opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH
 
-  # Fix ruby path
-  set -gx PATH /opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH
-
-  # gcloud macOS
-  source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
+     
+      # pnpm
+      set -gx PNPM_HOME "/Users/ryan/Library/pnpm"
+      if not string match -q -- $PNPM_HOME $PATH
+        set -gx PATH "$PNPM_HOME" $PATH
+      end
+  end
 
   # Compilers
   # set -gx LDFLAGS "-L/usr/local/opt/llvm@5/lib"
   # set -gx CPPFLAGS "-I/usr/local/opt/llvm@5/include"
   # if which swiftenv > /dev/null; status --is-interactive; and source (swiftenv init -|psub); end
   # set -gx SWIFTENV_ROOT "$HOME/.swiftenv"
+  # set -gx PATH "$SWIFTENV_ROOT/bin" $PATH
 
-  # PGP (macOS)
+# PGP
   set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
   set -x GPG_TTY (tty)
   gpgconf --launch gpg-agent
 
+  # Foundry
   export PATH="$PATH:$HOME/.foundry/bin"
-
-  # pnpm (macOS)
-set -gx PNPM_HOME "/Users/ryan/Library/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
-end
-# pnpm end
 
 end
 
@@ -55,7 +60,6 @@ test -s $HOME/.nvm/nvm.fish; and source $HOME/.nvm/nvm.fish
 alias ne="nvm exec -- "
 
 # Path
-set -gx PATH "$SWIFTENV_ROOT/bin" $PATH
 set -gx PATH ~/Developer/bin $PATH
 set -gx GOPATH ~/Developer
 

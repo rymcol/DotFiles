@@ -3,7 +3,7 @@
 [includeIf "gitdir:**/toknapp/**/.git"]
   path = .toknapp.gitconfig
 [gpg]
-	program = /opt/homebrew/bin/gpg
+	program = /run/current-system/sw/bin/gpg
 [commit]
 	gpgsign = true
 [filter "lfs"]
@@ -13,19 +13,15 @@
 	required = true
 #[url "git@github.com:"]
 #	insteadOf = https://github.com/
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
-[merge]
-	tool = Kaleidoscope
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[merge] 
+    tool = vimdiff
+[mergetool "vimdiff"]
+    cmd = vim "$MERGED"
+    prompt = false
 [difftool]
 	prompt = false
-[mergetool]
-	prompt = false
 [diff]
-	tool = Kaleidoscope
+	tool = vimdiff
 [pull]
 	rebase = false
 [init]
